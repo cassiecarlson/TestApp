@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Windows.Phone.Media.Capture;
 using Microsoft.Phone.Controls;
@@ -14,6 +16,10 @@ namespace TestApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private AudioVideoCaptureDevice audioVideoCaptureDevice;
+        private bool isFlashOn;
+        private BitmapImage MyBitmapImage = new BitmapImage();
+
         // Constructor
         public MainPage()
         {
@@ -24,9 +30,6 @@ namespace TestApp
             // ApplicationBar is that dumb swipe in options menu
             //BuildLocalizedApplicationBar();
         }
-
-        AudioVideoCaptureDevice audioVideoCaptureDevice;
-        private bool isFlashOn;
 
         async private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -39,11 +42,29 @@ namespace TestApp
             }
             if (!isFlashOn)
             {
+                // call the method that controls the light and tell it to turn the light on
                 FlashOn(location, VideoTorchMode.On);
+                // set the text of the button to say flash off
+                FlashButton.Content = "Flash Off";
+                // set the bitmap image to the flashlight on image
+                MyBitmapImage.UriSource = new Uri("/Assets/Images/flashlight_on.png", UriKind.Relative);
+                // apply the bitmap image to the image defined in xaml
+                LightbulbDrawableImage.Source = MyBitmapImage;
+                // set the bool isFlashOn to true so the program knows to turn the light off on next click
+                isFlashOn = true;
             }
             else if (isFlashOn)
             {
+                // call the method that controls the light and tell it to turn the light off
                 FlashOn(location, VideoTorchMode.Off);
+                // set the text of the button to say flash on
+                FlashButton.Content = "Flash On";
+                // set the bitmap image to the flashlight off image
+                MyBitmapImage.UriSource = new Uri("/Assets/Images/flashlight_off.png", UriKind.Relative);
+                // apply the bitmap image to the image defined in xaml
+                LightbulbDrawableImage.Source = MyBitmapImage;
+                // set the bool isFlashOn to false so the program knows to turn the light on on next click
+                isFlashOn = false;
             }
         }
 
@@ -58,11 +79,6 @@ namespace TestApp
                 return true;
             }
             return false;
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
         }
 
         // Sample code for building a localized ApplicationBar
