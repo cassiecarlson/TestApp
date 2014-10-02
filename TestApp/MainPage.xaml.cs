@@ -14,8 +14,6 @@ namespace TestApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private bool isFlashOn;
-
         // Constructor
         public MainPage()
         {
@@ -28,6 +26,7 @@ namespace TestApp
         }
 
         AudioVideoCaptureDevice audioVideoCaptureDevice;
+        private bool isFlashOn;
 
         async private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -35,17 +34,29 @@ namespace TestApp
             CameraSensorLocation location = CameraSensorLocation.Back;
             if (this.audioVideoCaptureDevice == null)
             {
-                audioVideoCaptureDevice =
-                    await
-                        AudioVideoCaptureDevice.OpenAsync(location,
-                            AudioVideoCaptureDevice.GetAvailableCaptureResolutions(location).First());
+                audioVideoCaptureDevice = await AudioVideoCaptureDevice.OpenAsync(location,
+                        AudioVideoCaptureDevice.GetAvailableCaptureResolutions(location).First());
+            }
+            if (!isFlashOn)
+            {
+                FlashOn(location, VideoTorchMode.On);
+            }
+            else if (isFlashOn)
+            {
+                FlashOn(location, VideoTorchMode.Off);
             }
         }
 
         public bool FlashOn(CameraSensorLocation location, VideoTorchMode mode)
         {
-            
-            
+            // code that turns light on or off
+            var supportedCameraModes = AudioVideoCaptureDevice.GetSupportedPropertyValues(location,
+                KnownCameraAudioVideoProperties.VideoTorchMode);
+            if ((audioVideoCaptureDevice != null) && (supportedCameraModes.ToList().Contains((UInt32)mode)))
+            {
+                audioVideoCaptureDevice.SetProperty(KnownCameraAudioVideoProperties.VideoTorchMode, mode);
+                return true;
+            }
             return false;
         }
 
