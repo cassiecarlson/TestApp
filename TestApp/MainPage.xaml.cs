@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Windows.Phone.Media.Capture;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TestApp.Resources;
@@ -18,15 +19,39 @@ namespace TestApp
         // Constructor
         public MainPage()
         {
+            // reads in all the XAML files and creates UI
             InitializeComponent();
 
             // Sample code to localize the ApplicationBar
+            // ApplicationBar is that dumb swipe in options menu
             //BuildLocalizedApplicationBar();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        AudioVideoCaptureDevice audioVideoCaptureDevice;
 
+        async private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // turn flashlight on
+            CameraSensorLocation location = CameraSensorLocation.Back;
+            if (this.audioVideoCaptureDevice == null)
+            {
+                audioVideoCaptureDevice =
+                    await
+                        AudioVideoCaptureDevice.OpenAsync(location,
+                            AudioVideoCaptureDevice.GetAvailableCaptureResolutions(location).First());
+            }
+        }
+
+        public bool FlashOn(CameraSensorLocation location, VideoTorchMode mode)
+        {
+            
+            
+            return false;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            
         }
 
         // Sample code for building a localized ApplicationBar
