@@ -2,7 +2,7 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
   <App xmlns="" ProductID="{793dc8ca-ee8d-43db-ba37-c6881c725d93}" Title="Lightbulb" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Kyle Riedemann" Description="A simple flashlight app ported from Android" Publisher="Kyle Riedemann" PublisherID="{f741d765-dd7d-4cb4-9a94-a67f3727ffdc}">
-    <IconPath IsRelative="true" IsResource="false">flashlight_off.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">app_icon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
@@ -18,9 +18,9 @@
     <Tokens>
       <PrimaryToken TokenID="TestAppToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">app_icon.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">app_icon.png</BackgroundImageURI>
           <Title>Lightbulb</Title>
           <BackContent>
           </BackContent>
@@ -28,8 +28,7 @@
           </BackBackgroundImageURI>
           <BackTitle>
           </BackTitle>
-          <LargeBackgroundImageURI IsRelative="true" IsResource="false">
-          </LargeBackgroundImageURI>
+          <LargeBackgroundImageURI IsRelative="true" IsResource="false">app_icon.png</LargeBackgroundImageURI>
           <LargeBackContent />
           <LargeBackBackgroundImageURI IsRelative="true" IsResource="false">
           </LargeBackBackgroundImageURI>
