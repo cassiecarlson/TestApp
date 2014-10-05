@@ -46,7 +46,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10,0,14,0">
-            <Button Name="FlashButton" Content="Flash On" HorizontalAlignment="Left" Margin="40,550,0,0" VerticalAlignment="Top" Width="380" Click="Button_Click"/>
+            <Button Name="FlashButton" Content="Flash On" Margin="40,550,36,0" VerticalAlignment="Top" Click="Button_Click"/>
             <Image Name="LightbulbDrawableImage" HorizontalAlignment="Center" Height="450" VerticalAlignment="Bottom" Width="450" Source="/Assets/Images/flashlight_off.png" Stretch="UniformToFill" Margin="0,0,0,205" />
         </Grid>
 

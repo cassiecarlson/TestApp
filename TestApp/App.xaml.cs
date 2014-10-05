@@ -4,6 +4,7 @@ using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using Windows.Phone.Media.Capture;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TestApp.Resources;
@@ -12,6 +13,8 @@ namespace TestApp
 {
     public partial class App : Application
     {
+        public static bool IsInitialLaunch;
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -61,6 +64,7 @@ namespace TestApp
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            IsInitialLaunch = true;
         }
 
         // Code to execute when the application is activated (brought to foreground)

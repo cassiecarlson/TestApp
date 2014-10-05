@@ -26,12 +26,23 @@ namespace TestApp
             // reads in all the XAML files and creates UI
             InitializeComponent();
 
+            if (App.IsInitialLaunch)
+            {
+                FlashOn();
+                App.IsInitialLaunch = false;
+            }
+
             // Sample code to localize the ApplicationBar
             // ApplicationBar is that dumb swipe in options menu
             //BuildLocalizedApplicationBar();
         }
 
-        async private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FlashOn();
+        }
+
+        async public void FlashOn()
         {
             // turn flashlight on
             CameraSensorLocation location = CameraSensorLocation.Back;
@@ -43,7 +54,7 @@ namespace TestApp
             if (!isFlashOn)
             {
                 // call the method that controls the light and tell it to turn the light on
-                FlashOn(location, VideoTorchMode.On);
+                FlashController(location, VideoTorchMode.On);
                 // set the text of the button to say flash off
                 FlashButton.Content = "Flash Off";
                 // set the bitmap image to the flashlight on image
@@ -56,7 +67,7 @@ namespace TestApp
             else if (isFlashOn)
             {
                 // call the method that controls the light and tell it to turn the light off
-                FlashOn(location, VideoTorchMode.Off);
+                FlashController(location, VideoTorchMode.Off);
                 // set the text of the button to say flash on
                 FlashButton.Content = "Flash On";
                 // set the bitmap image to the flashlight off image
@@ -68,7 +79,7 @@ namespace TestApp
             }
         }
 
-        public bool FlashOn(CameraSensorLocation location, VideoTorchMode mode)
+        public bool FlashController(CameraSensorLocation location, VideoTorchMode mode)
         {
             // code that turns light on or off
             var supportedCameraModes = AudioVideoCaptureDevice.GetSupportedPropertyValues(location,
